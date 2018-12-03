@@ -28,6 +28,7 @@ I want to give some contraints to lower the difficulty
 ### Type-2 Joke: 
 - conversation between two people
 - 4-frame cartoons 
+<img src="joke.png" alt="Type-2" class="inline"/>
 
 
 
