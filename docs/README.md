@@ -1,37 +1,38 @@
-## Welcome to GitHub Pages
+## Joke to Comic Generator
 
-You can use the [editor on GitHub](https://github.com/lockercho/cc2018final/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Background and Motivation
+"Humor" is always being a hard topic since it's highly personal and hard to measure.
+It's really cool if I can generate a comic from a joke.
+This project is the final project for the course "Conginitive Computing 2018".
+The goal of this course is "beyond recognition", so I wish to deliver a project that fits this goal.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Problem Definition
+Given a joke x, output a comic y that is q
 
-### Markdown
+### Challenge
+- Image often contains more information that text. The relation between text and image is one-to-many, and the context also affects choosing "correct" image representation.
+- There is no dataset nor previous work for such task.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Methodology
 
-```markdown
-Syntax highlighted code block
+I want to give some contraints to lower the difficulty
 
-# Header 1
-## Header 2
-### Header 3
+### "Joke" Constraint
+- The joke should be in conversation format
 
-- Bulleted
-- List
+### "Comic" Constraint
+- Instead of "GAN" the whole image, I want to use the pre-built comic ingredient "rage comic".
 
-1. Numbered
-2. List
+### Type-1 Joke: question and answer
 
-**Bold** and _Italic_ and `Code` text
+### Type-2 Joke: 
+- conversation between two people
+- 4-frame cartoons 
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lockercho/cc2018final/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+## References
+- Joke dataset https://github.com/taivop/joke-dataset
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
