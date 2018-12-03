@@ -25,8 +25,11 @@ I want to give some contraints to lower the difficulty
 
 ### Type-1 Joke: question and answer
 
-### Type-2 Joke: 
-- conversation between two people
+<img src="type1example.png" width="300px" alt="Type-2" class="inline"/>
+<img src="type1.png" width="300px" alt="Type-2" class="inline"/>
+
+
+### Type-2 Joke: conversation between two people
 - 4-frame cartoons 
 
 
