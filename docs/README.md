@@ -17,8 +17,9 @@ I defined two types of joke comics to lower the difficulty:
 - **Type-1**: 
 	- The joke is a question and a humorous answer
 	- The comic will be an image with the joke itself.
-	<img src="type1example.png" width="300px" alt="Type-1" class="inline"/>
-	<img src="type1.png" width="300px" alt="Type-1" class="inline"/>
+
+<img src="type1example.png" width="300px" alt="Type-1" class="inline"/>
+<img src="type1.png" width="300px" alt="Type-1" class="inline"/>
 
 
 - **Type-2**:
