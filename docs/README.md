@@ -17,11 +17,11 @@ Given a joke x, output a comic y that is q
 
 I want to give some contraints to lower the difficulty
 
-### "Joke" Constraint
-- The joke should be in conversation format
+- "Joke" Constraint
+	- The joke should be in conversation format
 
-### "Comic" Constraint
-- Instead of "GAN" the whole image, I want to use the pre-built comic ingredient "rage comic".
+- "Comic" Constraint
+	- Instead of "GAN" the whole image, I want to re-use the pre-built comic ingredient "rage comic".
 
 ### Type-1 Joke: question and answer
 
@@ -35,8 +35,6 @@ I want to give some contraints to lower the difficulty
 
 <img src="example.png" width="300px" alt="Type-2" class="inline"/>
 <img src="joke.png" width="300px" alt="Type-2" class="inline"/>
-
-
 
 
 ## References
