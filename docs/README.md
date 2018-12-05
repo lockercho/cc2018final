@@ -49,6 +49,13 @@ I defined two types of joke comics to lower the difficulty:
 
 <img src="type2_method.png" alt="Type-2" class="inline"/>
 
+## Work
+
+- Crawl PTT Joke board
+- Try to "select" image by the text embedding
+- Croud sourcing to evaluate the result (generate 4 result, choose the best fits)
+- (Additional) GAN the image
+
 
 
 
