@@ -14,7 +14,7 @@ The goal of this course is "beyond recognition", so I wish to deliver a project 
 `Given a joke x, output a comic y`
 
 I defined two types of joke comics to lower the difficulty:
-- **Type-1**: 
+### Type-1 
 	- The joke is a question and a humorous answer
 	- The comic will be an image with the joke itself.
 
@@ -22,7 +22,7 @@ I defined two types of joke comics to lower the difficulty:
 <img src="type1.png" width="300px" alt="Type-1" class="inline"/>
 
 
-- **Type-2**:
+### Type-2
 	- The joke is a conversation (mainly two people included)
 	- The comic will be an 4-frame cartoons describing the joke.
 
@@ -48,6 +48,13 @@ I defined two types of joke comics to lower the difficulty:
 - For type-2 joke, the challenge is to split the joke and meanwhile maintaining the relation between each frames
 
 <img src="type2_method.png" alt="Type-2" class="inline"/>
+
+## Work
+
+- Crawl PTT Joke board
+- Try to "select" image by the text embedding
+- Croud sourcing to evaluate the result (generate 4 result, choose the best fits)
+- (Additional) GAN the image
 
 
 
