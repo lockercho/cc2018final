@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {
+			width: 100%;
+			height:600px;
+			
+			/*background-color:gray;*/
+		}
+		img {
+			max-width:140px;
+			max-height:140px;
+		}
+		.left > div, .right > div{
+			float:left;
+		}
+		/*#joke, #images {
+			float:left;
+		}*/
+		.image {
+			border: 4px solid transparent;
+			width: 140px;
+			height:165px;
+			margin:5px;
+			border-radius: 20px;
+			padding:5px;
+			border: 4px solid #ddd;
+			cursor: pointer;
+		}
+		.image:hover {
+			border: 4px solid #00adee;
+		}
+		#numbers {
+			text-align: center;
+			width: 499px;
+			margin: 10px auto;
+			/*height: 600px;*/
+		}
+		#joke {
+			
+			/*height: 600px;*/
+		}
+		#joke > div {
+			float:left;
+		}
+		#images {
+			margin-top:50px;
+			width: 700px;
+			margin: 0 auto;	
+			height:200px;
+			/*height: 600px;	*/
+		}
+		#joke-container {
+			width: 499px;
+			min-height: 220px;
+			margin: 20px auto;
+		}
+		#joke {
+			border: 2px solid black;
+			border-radius: 20px;
+			padding:20px;
+			width: 480px;
+			display: inline-block;
+			min-height: 160px;
+		}
+		#joke-img {
+			float:left;
+			width:170px;
+		}
+		#joke-text {
+			float:left;
+			width:300px;
+		}
+		#description {
+			width: 500px;
+			margin:0 auto;
+			text-align: center;
+			line-height: 28px;
+		}
+	</style>
+</head>
+<body>
+	<div id="numbers">
+	</div>
+	<div id="joke-container">
+		<div id="joke">
+			<div id="joke-img">
+				<img src="empty.png" />
+			</div>	
+			<div id="joke-text">
+			室友A：欸，我剛剛在回家的路上看到閃亮三姊妹的老二欸 <br><br>
+			我：？？她們不是女的嗎？ <br><br>
+			室友A：我說閃亮二姊啦<br>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div id="images">
+		<div class="left">
+			<div data-img-id="1" class="image">
+				A.
+				<img src="1.png" />
+			</div>
+			<div data-img-id="2" class="image">
+				B.
+				<img src="2.png" />
+			</div>
+			<div data-img-id="3" class="image">
+				C.
+				<img src="3.png" />
+			</div>
+			<div data-img-id="0" class="image">
+				D.
+				<img src="0.png" />
+			</div>
+		</div>
+		<!-- <div class="right">
+			<div data-img-id="4" class="image">
+				<img src="4.png" />
+			</div>
+			<div data-img-id="5" class="image">
+				<img src="5.png" />
+			</div>
+			<div data-img-id="0" class="image" style="height:90px;text-align: center;padding-top:50px">
+				都不適合欸
+			</div>
+		</div> -->
+	</div>
+	<div id="description">
+		<span style="color:blue;font-weight: bold;">
+		**游標 hover 到選項上可以看到預覽畫面<br>
+		</span>
+		請選擇 A ~ C 適合搭配此則笑話的圖片，若覺得都不適合，請選 D
+	</div>
+</body>
+</html>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>  
+<script type="text/javascript">
+	const joke_key = 'current_joke'
+	var joke_id = localStorage.getItem(joke_key) || -1
+
+	function handleError() {
+		swal("好像發生了啥錯誤，即將重新整理")
+		.then(() => {
+		  location.reload()
+		});
+	}
+	function reloadJoke() {
+		$.get(`joke?current=${joke_id}`, (data) => {
+			// console.log(data)
+			// try {
+			// 	data = JSON.parse(data)
+			// } catch(e) {
+			// 	handleError()
+			// }
+			// replace current joke
+			var joke = data.joke
+			joke = joke.split("\n").join('<br/><br/>');
+
+			$('#joke-text').html(joke)
+			joke_id = data.id
+			$('#numbers').text(`${joke_id+1} / ${data.njokes}`)
+			$('#joke-img img').attr('src', 'empty.png')	
+		})
+	}
+
+	// initial 
+	reloadJoke()
+
+	const participant_key = 'py-participant'
+	var participant = localStorage.getItem(participant_key) 
+	
+	if(!participant) {
+		swal({
+			text:"請問你是誰？(只會問一次)",
+			content: "input",
+		})
+		.then((value) => {
+		  swal(`謝謝 ${value}\n請幫忙對每則笑話選出最適合的圖片\n若您覺得每張圖都不適合，請選擇 X`);
+		  localStorage.setItem(participant_key, value);
+		  participant = value
+		});
+	} else {
+		// swal(`Hi ${participant} 歡迎回來`)
+	}	
+
+	$('.image').hover((e) => {
+		var $el = $(e.target)
+		if(!$el.hasClass('image')) {
+			$el = $el.parents('.image')
+		}
+		console.log('hover', $el)
+		console.log('hover', $el.attr('src'))
+		if($el.find('img').length == 0) {
+			$('#joke-img img').attr('src', 'empty.png')	
+		} else {
+			$('#joke-img img').attr('src', $el.find('img').attr('src'))	
+		} 
+		
+		
+	})
+
+	$('body').on('click', '.image', function(e) {
+		e.preventDefault()
+		e.stopPropagation()
+		const $el = $(this)
+		if(!$el.attr('data-img-id')) {
+			$el.parents('.image')
+		}
+		if(joke_id == -1) {
+			swal("好像發生了啥錯誤，即將重新整理")
+			.then(() => {
+			  location.reload()
+			});
+		}
+		// send the tag
+		var label = $el.attr('data-img-id')
+		console.log(label)
+		var params = {
+			joke_id,
+			label,
+			participant
+		}
+		$.post('label', params, (e) => {
+			localStorage.setItem(joke_key, joke_id);
+			reloadJoke()
+		})
+	})
+	
+</script>
