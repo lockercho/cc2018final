@@ -153,6 +153,9 @@
 		});
 	}
 	function reloadJoke() {
+		if(joke_id == 115) {
+			swal("題目到此結束，非常感謝您的參與！！\n若您願意把此測驗分享給別人，研究生感激不盡XDD")
+		}
 		$.get(`joke?current=${joke_id}`, (data) => {
 			// console.log(data)
 			// try {
@@ -203,8 +206,6 @@
 		} else {
 			$('#joke-img img').attr('src', $el.find('img').attr('src'))	
 		} 
-		
-		
 	})
 
 	$('body').on('click', '.image', function(e) {
