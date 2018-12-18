@@ -165,7 +165,7 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>  
 <script type="text/javascript">
 	const joke_key = 'current_joke'
-	var joke_id = localStorage.getItem(joke_key) || -1
+	var joke_id = localStorage.getItem(joke_key) || Math.floor((Math.random() * 254));
 
 	function handleError() {
 		swal("好像發生了啥錯誤，即將重新整理")
