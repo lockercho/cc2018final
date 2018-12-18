@@ -36,7 +36,7 @@
 			text-align: center;
 			width: 499px;
 			margin: 10px auto;
-			display: none;
+			/*display: none;*/
 			/*height: 600px;*/
 		}
 		#joke {
@@ -166,8 +166,11 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>  
 <script type="text/javascript">
 	const joke_key = 'current_joke'
-	var joke_id = localStorage.getItem(joke_key) || Math.floor((Math.random() * 254));
-
+	const total = 254
+	var joke_id = localStorage.getItem(joke_key) || Math.floor((Math.random() * total));
+	if(!localStorage.getItem('labeled_count')) {
+		localStorage.setItem('labeled_count', 0)
+	}
 	function handleError() {
 		swal("好像發生了啥錯誤，即將重新整理")
 		.then(() => {
@@ -186,9 +189,13 @@
 			var joke = data.joke
 			joke = joke.split("\n").join('<br/><br/>');
 
+			if(parseInt(localStorage.getItem('labeled_count')) == total) {
+				swal("所有題目到此結束，謝謝您的作答\n如果覺得有趣也歡迎分享給朋友們\n謝謝")
+			}
+
 			$('#joke-text').html(joke)
 			joke_id = data.id
-			$('#numbers').text(`${joke_id+1} / ${data.njokes}`)
+			$('#numbers').text(`${parseInt(localStorage.getItem('labeled_count'),10)%total+1} / ${data.njokes}`)
 			$('#joke-img img').attr('src', 'empty.png')	
 		})
 	}
@@ -250,6 +257,10 @@
 		}
 		$.post('label', params, (e) => {
 			localStorage.setItem(joke_key, joke_id);
+			localStorage.setItem(
+				'labeled_count', 
+				parseInt(localStorage.getItem('labeled_count'),10)+1
+			)
 			reloadJoke()
 		})
 	})
@@ -265,6 +276,10 @@
 		}
 		$.post('label', params, (e) => {
 			localStorage.setItem(joke_key, joke_id);
+			localStorage.setItem(
+				'labeled_count', 
+				parseInt(localStorage.getItem('labeled_count'),10)+1
+			)
 			reloadJoke()
 		})
 	})
