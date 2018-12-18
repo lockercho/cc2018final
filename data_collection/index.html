@@ -79,10 +79,27 @@
 			text-align: center;
 			line-height: 28px;
 		}
+		#skip {
+			margin: 20px auto;
+			height: 50px;
+			width:200px;
+			background-color: #ccc;
+			border-radius: 25px;
+			text-align: center;
+			line-height: 50px;
+			cursor: pointer;
+		}
+		#skip:hover {
+			background-color: #00adee;
+		}
 	</style>
 </head>
 <body>
 	<div id="numbers">
+	</div>
+	<div id="description">
+	請選擇適合搭配此則笑話的圖片，若都不適合，請選 D<br>
+	若看不懂此則笑話，請選擇跳過
 	</div>
 	<div id="joke-container">
 		<div id="joke">
@@ -90,11 +107,16 @@
 				<img src="empty.png" />
 			</div>	
 			<div id="joke-text">
-			室友A：欸，我剛剛在回家的路上看到閃亮三姊妹的老二欸 <br><br>
+			<!-- 室友A：欸，我剛剛在回家的路上看到閃亮三姊妹的老二欸 <br><br>
 			我：？？她們不是女的嗎？ <br><br>
-			室友A：我說閃亮二姊啦<br>
+			室友A：我說閃亮二姊啦<br> -->
 			</div>
 			</div>
+		</div>
+	</div>
+	<div id="skip-container">
+		<div id="skip">
+			看不懂，跳過
 		</div>
 	</div>
 	<div id="images">
@@ -132,7 +154,6 @@
 		<span style="color:blue;font-weight: bold;">
 		**游標 hover 到選項上可以看到預覽畫面<br>
 		</span>
-		請選擇 A ~ C 適合搭配此則笑話的圖片，若覺得都不適合，請選 D
 	</div>
 </body>
 </html>
@@ -153,9 +174,6 @@
 		});
 	}
 	function reloadJoke() {
-		if(joke_id == 115) {
-			swal("題目到此結束，非常感謝您的參與！！\n若您願意把此測驗分享給別人，研究生感激不盡XDD")
-		}
 		$.get(`joke?current=${joke_id}`, (data) => {
 			// console.log(data)
 			// try {
@@ -227,6 +245,21 @@
 		var params = {
 			joke_id,
 			label,
+			participant
+		}
+		$.post('label', params, (e) => {
+			localStorage.setItem(joke_key, joke_id);
+			reloadJoke()
+		})
+	})
+	$('body').on('click', '#skip', function(e) {
+		e.preventDefault()
+		e.stopPropagation()
+
+		// send the tag
+		var params = {
+			joke_id,
+			label: -1,
 			participant
 		}
 		$.post('label', params, (e) => {
